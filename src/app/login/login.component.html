@@ -1,0 +1,29 @@
+<div id="protector">
+    <div id="protector-content">
+        <div id="protector-card">
+            <div id="card-content">
+                <div id="logo">
+                    <img src="assets/images/CrazyDaveSolutions.png" alt="Crazy Dave Soluions Logo" class="img-fluid">
+                </div>
+                <div id="form">
+                    <label>
+                        Usuario:
+                    </label>
+                    <input type="text" [(ngModel)]="user">
+                    <br>
+                    <br>
+                    <label>
+                        Contraseña
+                    </label>
+                    <input type="password" [(ngModel)]="password">
+                    <br>
+                    <br>
+                    <div id="buttons">
+                        <button type="button" (click)="login()">Entrar</button>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

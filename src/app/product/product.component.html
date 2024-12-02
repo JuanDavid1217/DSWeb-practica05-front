@@ -1,0 +1,18 @@
+<div id="component-container">
+    <div id="card">
+        <div id="card-content">
+            <div id="section">
+                <div id="tool-bar">
+                    <input type="text" placeholder="Filtrar por Nombre">
+                    <button type="button">Nuevo</button>
+                </div>
+                <div id="products">
+                    <p *ngIF="products.lenght<=0; else product">No hay productos</p>
+                    <div #product id="product">
+                        <div *ngFor="let product of products, index as i" [style]="{'border-bottom': i < products.length-1?'1px solid black':'none','height':'150px', 'padding':'10px'}">Hola</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

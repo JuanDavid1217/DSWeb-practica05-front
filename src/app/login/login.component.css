@@ -1,0 +1,64 @@
+#protector{
+    width: 100%;
+    height: 200%;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+#protector-content{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#protector-card{
+    width: 70%;
+    height: auto;
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffdf7;
+}
+
+#card-content{
+    width: 80%;
+}
+
+#form{
+    width: 100%;
+}
+
+#logo, #buttons{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    border-radius: 5px;
+    height: 20px;
+    padding: 5px;
+}
+
+button{
+    width: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ffebd1;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+button:hover{
+    background-color: #fdb4b4;
+}
