@@ -6,7 +6,7 @@
 }
 
 #section{
-    width: 90%;
+    width: 85%;
 }
 
 #tool-bar{
@@ -30,11 +30,25 @@
     background-color: rgb(253, 180, 180);
 }
 
-input{
+#tool-input{
     width: 70%;
     height: 30px;
     padding: 10px;
     border-radius: 10px;
+}
+
+#productsNotFound{
+    background-color: #e4d4fc;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p{
+    width: auto;
+    height: auto;
 }
 
 #products{
@@ -45,8 +59,159 @@ input{
     display: flex;
     justify-content: center;
     overflow: auto;
+    scrollbar-width: none;
+    border-radius: 10px;
 }
 
 #product{
-    width: 90% !important;
+    width: 90%;
+    justify-items: center;
+}
+
+#product-content > div{
+    width: auto;
+    height: auto;
+    flex: 1;
+}
+
+#product-content:hover{
+    transform: scale(1.03) translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+#properties{
+    flex: 2 !important;
+}
+
+#name, #description, #stock{
+    height: auto;
+}
+
+#name{
+    font-size: 16px;
+}
+
+#description{
+    font-size: 20px;
+}
+
+#stock{
+    font-size:smaller;
+}
+
+#options {
+    display: flex !important;
+    flex: none !important;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+#modify, #delete{
+    width: auto;
+    height: auto;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+
+#modify{
+    background-color: #89D9D1;
+}
+
+#modify:hover{
+    background-color: #55ccc0;
+}
+
+#delete{
+    background-color: #C9ACF2;
+}
+
+#delete:hover{
+    background-color: #9471c4;
+}
+
+#protector{
+    width: 100%;
+    height: 200%;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9990;
+}
+
+#protector-content{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#protector-card{
+    min-width: 300px;
+    width: auto;
+    height: auto;
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffdf7;
+    z-index: 9999;
+}
+
+#protector-card-content{
+    width: 80%;
+}
+
+
+#protector-card-content > p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+.confirm-dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+  
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    font-weight: bold;
+}
+  
+.btn-accept {
+    background-color: #89D9D1;
+}
+  
+.btn-accept:hover {
+    background-color: #55ccc0;
+}
+  
+.btn-cancel {
+    background-color: #C9ACF2;
+}
+  
+.btn-cancel:hover {
+    background-color: #9471c4;
+}
+
+#protector-card-content-input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
 }

@@ -3,14 +3,107 @@
         <div id="card-content">
             <div id="section">
                 <div id="tool-bar">
-                    <input type="text" placeholder="Filtrar por Nombre">
-                    <button type="button">Nuevo</button>
+                    <input id="tool-input" type="text" placeholder="Filtrar por Nombre" [(ngModel)]="mask" (input)="filter()">
+                    <button type="button" (click)="showUpdateWindow(1)">Nuevo</button>
                 </div>
-                <div id="products">
-                    <p *ngIF="products.lenght<=0; else product">No hay productos</p>
+                <div id="productsNotFound" *ngIf="products.length<=0">
+                    <p>No hay productos</p>    
+                </div>
+                <div id="products" *ngIf="products.length>0">
                     <div #product id="product">
-                        <div *ngFor="let product of products, index as i" [style]="{'border-bottom': i < products.length-1?'1px solid black':'none','height':'150px', 'padding':'10px'}">Hola</div>
+                        <div id='product-content' *ngFor="let product of products, index as i"
+                             [style]="{'border-bottom': i < products.length-1?'1px solid black':'none',
+                                       'height':'auto', 'padding':'10px',
+                                       'display':'flex',
+                                       'flex-wrap':'wrap',
+                                       'aligne-items':'center',
+                                       'justify-content':'center',
+                                       'column-gap': '30px',
+                                       'row-gap':'5px',
+                                       'width':'90%',
+                                       'transition': 'transform 0.3s ease, box-shadow 0.3s ease',
+                                       'border-radius':'5px',
+                                       'margin':'7px 0px 7px 0px'}"
+                        >
+                            <div id="image">
+                                <img src="assets/images/oranges.jpg" alt="imagen descriptiva" class="img-fluid">
+                                <div 
+                                    [style]="{'background-color': product.stock>0?'rgba(3, 252, 19, 0.3)':'rgba(252, 0, 0, 0.3)',
+                                              'color':product.stock>0?'rgb(3, 145, 15)':'rgb(191, 2, 2)',
+                                              'width':'90px', 'height':'auto', 'padding':'5px', 'border-radius':'5px'}"
+                                >
+                                    {{product.stock>0?'In Stock':'Sold Out'}}
+                                </div>
+                            </div>
+                            <div id="properties">
+                                <div id="name">{{product.name}}</div>
+                                <div id="description">{{product.description}}</div>
+                                <div id="stock">Cantidad: {{product.stock}} pz.</div>
+                            </div>
+                            <div id="options">
+                                <button id="modify" type="button" (click)="showUpdateWindow(product)">Modificar</button>
+                                <button id="delete" type="button" (click)="showDeleteWindow(product)">Eliminar</button>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="protector" *ngIf="isActivateUpdateWindow" (click)="closeWindows()">
+    <div id="protector-content">
+        <div id="protector-card" (click)="clickCard($event)">
+            <div id="protector-card-content">
+                <h2 *ngIf="selectedProduct.id==null">Alta de Productos</h2>
+                <h2 *ngIf="selectedProduct.id!=null">Actualización del Producto {{selectedProduct.id}}</h2>
+                <br>
+                <div>
+                    <label>Nombre:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedProduct.name">
+                </div>
+                <br>
+                <div>
+                    <label>Descripción:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedProduct.description">
+                </div>
+                <br>
+                <div>
+                    <label>Precio Venta:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedProduct.price">
+                </div>
+                <br>
+                <div>
+                    <label>Cantidad Disponible:</label>
+                </div>
+                <div>
+                    <input type="text" id="protector-card-content-input" [(ngModel)]="selectedProduct.stock">
+                </div>
+                <br>
+                <div class="confirm-dialog-actions">
+                    <button class="btn btn-accept" (click)="update()">Aceptar</button>
+                    <button class="btn btn-cancel" (click)="closeWindows()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="protector" *ngIf="isActivateDeleteWindow" (click)="closeWindows()">
+    <div id="protector-content">
+        <div id="protector-card" (click)="clickCard($event)">
+            <div id="protector-card-content">
+                <p>¿Estás seguro de eliminar el producto: <span>{{selectedProduct.name}}</span>?</p>
+                <div class="confirm-dialog-actions">
+                    <button class="btn btn-accept" (click)="delete()">Aceptar</button>
+                    <button class="btn btn-cancel" (click)="closeWindows()">Cancelar</button>
                 </div>
             </div>
         </div>

@@ -44,6 +44,9 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.subscription = this.bindding.data$.subscribe(data => {
+      for (let i=0; i<this.options.length; i++){
+        this.options[i].isSelected=0;
+      }
       this.receivedData = data;
       if(data.index!=null  && this.options.length>0){
         this.options[data.index].isSelected=1;
@@ -55,9 +58,6 @@ export class AppComponent implements OnInit{
   }
 
   navigate(index:any){
-    for (let i=0; i<this.options.length; i++){
-      this.options[i].isSelected=0;
-    }
     if (this.options[index].name=="Salir"){
       localStorage.removeItem('authToken')
     }

@@ -5,7 +5,7 @@ import axios from 'axios';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ClientService {
 
   constructor(private service:GeneralService){};
 
@@ -15,44 +15,53 @@ export class ProductService {
     return headers;
   }
   
-  async getProducts(){
+  async getClients(){
     let headers = this.completeHeader();
     try{
-      return await axios.get<any>(this.service.apiURL+`/products`, headers={headers});
+      return await axios.get<any>(this.service.apiURL+`/clients`, headers={headers});
     }catch(Error){
       this.service.handleError(Error, 0)
       return null;
     }
   }
 
-  async updateProduct(id:number, body:any){
+  async updateClient(id:number, body:any){
     let headers = this.completeHeader();
     try{
-      return await axios.put<any>(this.service.apiURL+`/products/${id}`, body, headers={headers});
+      return await axios.put<any>(this.service.apiURL+`/clients/${id}`, body, headers={headers});
     }catch(Error){
       this.service.handleError(Error, 0)
       return null;
     }
   }
 
-  async deleteProduct(id:number){
+  async deleteClient(id:number){
     let headers = this.completeHeader();
     try{
-      return await axios.delete<any>(this.service.apiURL+`/products/${id}`, headers={headers});
+      return await axios.delete<any>(this.service.apiURL+`/clients/${id}`, headers={headers});
     }catch(Error){
       this.service.handleError(Error, 0)
       return null;
     }
   }
 
-  async createProduct(body:any){
+  async createClient(body:any){
     let headers = this.completeHeader();
     try{
-      return await axios.post<any>(this.service.apiURL+`/products`, body, headers={headers});
+      return await axios.post<any>(this.service.apiURL+`/clients`, body, headers={headers});
     }catch(Error){
       this.service.handleError(Error, 0)
       return null;
     }
   }
 
+  async getAllSalesByClient(id:number){
+    let headers = this.completeHeader();
+    try{
+      return await axios.get<any>(this.service.apiURL+`/sales/byClient/${id}`, headers={headers});
+    }catch(Error){
+      this.service.handleError(Error, 0)
+      return null
+    }
+  }
 }

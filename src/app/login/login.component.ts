@@ -17,7 +17,7 @@ export class LoginComponent {
   password:string = "";
 
   async login(){
-    if(this.user.trim()=="" && this.password.trim()==""){
+    if(this.user.trim()=="" || this.password.trim()==""){
       window.alert("Ingresa los campos solicitados.")
       return
     }

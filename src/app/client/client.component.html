@@ -1,5 +1,93 @@
 <div id="component-container">
     <div id="card">
-        client works!
+        <div id="card-content">
+            <div id="section">
+                <div id="tool-bar">
+                    <input id="tool-input" type="text" placeholder="Filtrar por Nombre" [(ngModel)]="mask" (input)="filter()">
+                    <button type="button" (click)="showNewWindow()">Nuevo</button>
+                </div>
+                <div id="clientsNotFound" *ngIf="clients.length<=0">
+                    <p>No hay clientes</p>    
+                </div>
+                <div id="clients" *ngIf="clients.length>0">
+                    <div id="client" *ngFor="let client of clients; index as i">
+                        <div id="client-content">
+                            <div>
+                                Id: {{client.id}}
+                            </div>
+                            <div>
+                                Cliente: {{client.name}} {{client.lastName}} {{client.maternalSurname!=null?client.maternalSurname:''}}
+                            </div>
+                            <div>
+                                Dirección: {{client.address}}
+                            </div>
+                            <div>
+                                Telefono: {{client.phone}}
+                            </div>
+                            <div>
+                                Email: {{client.email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="protector" *ngIf="isActivateNewWindow" (click)="closeWindow()">
+    <div id="protector-content">
+        <div id="protector-card" (click)="clickCard($event)">
+            <div id="protector-card-content">
+                <h2>Nuevo Cliente</h2>
+                <br>
+                <div>
+                    <label>Nombre:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.name">
+                </div>
+                <br>
+                <div>
+                    <label>Apellido Paterno:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.lastName">
+                </div>
+                <br>
+                <div>
+                    <label>Apellido Materno:</label>
+                </div>
+                <div>
+                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.maternalSurname">
+                </div>
+                <br>
+                <div>
+                    <label>Dirección:</label>
+                </div>
+                <div>
+                    <input type="text" id="protector-card-content-input" [(ngModel)]="selectedClient.address">
+                </div>
+                <br>
+                <div>
+                    <label>Teléfono:</label>
+                </div>
+                <div>
+                    <input type="text" id="protector-card-content-input" [(ngModel)]="selectedClient.phone">
+                </div>
+                <br>
+                <div>
+                    <label>Email:</label>
+                </div>
+                <div>
+                    <input type="email" id="protector-card-content-input" [(ngModel)]="selectedClient.email">
+                </div>
+                <br>
+                <div class="confirm-dialog-actions">
+                    <button class="btn btn-accept" (click)="create()">Aceptar</button>
+                    <button class="btn btn-cancel" (click)="closeWindow()">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
