@@ -9,6 +9,7 @@
 
 body{
     background-color: #e4d4fc;
+    min-width: 300px;
 }
 
 #component-container{
@@ -27,4 +28,13 @@ body{
 img{
     max-width: 100px;
     height: auto;
+}
+
+button{
+    cursor: pointer;
+}
+
+input{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

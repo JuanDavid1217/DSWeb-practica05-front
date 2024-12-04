@@ -1,0 +1,239 @@
+#card-content2{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#section2{
+    width: 100%;
+    margin: 20px 20px;
+}
+
+#card-content2{
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+#column{
+    width: 100%;
+    height: 470px;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.line{
+    width: auto;
+    height: auto;
+}
+
+.client-filter{
+    max-width: 200px;
+}
+
+.client{
+    padding: 10px 5px;
+    border-radius: 10px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.options{
+    width: 100%;
+    max-height: 85px;
+    overflow-y:auto;
+    scrollbar-width: none;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+
+.option{
+    padding: 5px;
+}
+
+.option:hover{
+    background-color: #cecece;
+    cursor: pointer;
+}
+
+.buttons{
+    display: flex;
+    justify-content: end;
+    margin: 8px 10px 10px 10px;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+    font-weight: bold;
+}
+  
+.btn-plus {
+    background-color: #89D9D1;
+}
+  
+.btn-plus:hover {
+    background-color: #55ccc0;
+}
+  
+.btn-minus {
+    background-color: #C9ACF2;
+}
+  
+.btn-minus:hover {
+    background-color: #9471c4;
+}
+
+#products-table, #allProductsTable{
+    width: 100%;
+    margin-top: 14px;
+    height: auto;
+    max-height: 300px;
+    position:relative;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.products-table>small{
+    position: absolute;
+    top: -15px;
+    left: 0px;
+}
+
+.controls{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+table{
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+}
+
+tr{
+    border-bottom: 1px solid black;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+th{
+    position: sticky;
+    top: 0;
+    background-color: #55ccc0;
+    width: auto;
+    height: auto;
+    color: white;
+    padding: 10px 0px;
+}
+
+td{
+    width: auto;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+td>button{
+    width: auto;
+    height: auto;
+    border:none;
+    background-color: initial;
+    margin: 5px 10px;
+}
+
+td>button:hover{
+    color:blue;
+}
+
+#protector{
+    width: 100%;
+    height: 200%;
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9990;
+}
+
+#protector-content{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#protector-card{
+    min-width: 300px;
+    width: auto;
+    height: auto;
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffdf7;
+    z-index: 9999;
+}
+
+#protector-card-content{
+    width: 80%;
+}
+
+#close{
+    width: auto;
+    height: auto;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+#close:hover{
+    background-color: #c50707;
+}
+
+#section3{
+    width: 100%;
+    margin: 40px 30px;
+}
+
+h1{
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#filterProductPosition{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.filterProduct{
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+}

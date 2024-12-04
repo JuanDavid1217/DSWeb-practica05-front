@@ -1,5 +1,130 @@
 <div id="component-container">
     <div id="card">
-        Hola
+        <div id="card-content2">
+            <div id="section2" *ngIf="!windowProducts">
+                <div id="column">
+                    <div class="line client-filter">
+                        <div class="line">
+                            <label>Cliente:</label>
+                        </div>
+                        <input type="text" class="line client" placeholder="Filtrar por Nombre" [(ngModel)]="selectedClientName" (input)="filter()"/>
+                        <div class="options" *ngIf="isVisibleFilter">
+                            <div class="line option" *ngFor="let client of clients; index as i" (click)="selectClient(client)">
+                                {{client.name}} {{client.lastName}} {{client.maternalSurname!=null?client.maternalSurname:''}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line buttons">
+                        <button class="btn btn-plus" type="button" (click)="showWindow()">Agregar</button>
+                        <button class="btn btn-minus" type="button" (click)="removeList()" [disabled]="selectedSaleProducts.length==0">Quitar</button>
+                    </div>
+                    <div id="products-table">
+                        <small>Productos: {{count}} -- Total: {{total}}</small>
+                        <table>
+                            <tr>
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Precio
+                                </th>
+                                <th>
+                                    Cantidad
+                                </th>
+                                <th>
+                                    Sub
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                            <tr *ngFor="let saleProduct of saleProducts; index as i"
+                                [style]="{
+                                    'background-color':saleProduct.selected?'rgba(31, 176, 242, 0.3)':'inherit'
+                                }"
+                                (click)="select2(saleProduct.id)"
+                            >
+                                <td>
+                                    {{i+1}}
+                                </td>
+                                <td>
+                                    {{saleProduct.name}}
+                                </td>
+                                <td>
+                                    {{saleProduct.price}}
+                                </td>
+                                <td>
+                                    {{saleProduct.quantity}}
+                                </td>
+                                <td>
+                                    {{saleProduct.price*saleProduct.quantity}}
+                                </td>
+                                <td>
+                                    <button type="button" (click)="remove(i)"><u>Quitar</u></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="line controls">
+                        <button class="btn btn-plus" [disabled]="saleProducts.length==0||selectedClientName.trim()==''" (click)="saveSale()">Comfirmar</button>
+                        <button class="btn btn-minus" type="button" (click)="clean()">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="section3" *ngIf="windowProducts">
+                <div id="close" (click)="closeWindow()">
+                    X
+                </div>
+                <div id="column">
+                    <h1>Productos</h1>
+                    <div id="filterProductPosition">
+                        <input type="text" class="filterProduct" (input)="filterProduct()" placeholder="Filtrar por nombre" [(ngModel)]="mask">
+                    </div>
+                    <div id="allProductsTable">
+                        <table>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Descripcion
+                                </th>
+                                <th>
+                                    Precio
+                                </th>
+                            </tr>
+                            <tr *ngFor="let product of products; index as i"
+                                [style]="{
+                                    'background-color':product.selected?'rgba(31, 176, 242, 0.3)':'inherit'
+                                }"
+                                (click)="select(product.id)"
+                            >
+                                <td>
+                                    {{product.id}}
+                                </td>
+                                <td>
+                                    {{product.name}}
+                                </td>
+                                <td>
+                                    {{product.description}}
+                                </td>
+                                <td>
+                                    {{product.price}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="line controls">
+                        <button class="btn btn-plus" *ngIf="selectedProducts.length>0" (click)="load()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

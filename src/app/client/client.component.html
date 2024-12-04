@@ -1,4 +1,4 @@
-<div id="component-container">
+<div id="component-container" *ngIf="!isPersonalDataVisible">
     <div id="card">
         <div id="card-content">
             <div id="section">
@@ -10,7 +10,7 @@
                     <p>No hay clientes</p>    
                 </div>
                 <div id="clients" *ngIf="clients.length>0">
-                    <div id="client" *ngFor="let client of clients; index as i">
+                    <div id="client" *ngFor="let client of clients; index as i" (click)="viewPersonalData(client)">
                         <div id="client-content">
                             <div>
                                 Id: {{client.id}}
@@ -35,7 +35,210 @@
     </div>
 </div>
 
-<div id="protector" *ngIf="isActivateNewWindow" (click)="closeWindow()">
+<div id="component-container" *ngIf="isPersonalDataVisible">
+    <div id="card">
+        <div id="card-content2">
+            <div id="section2">
+                <div id="close" (click)="close()">
+                    X
+                </div>
+                <div id="columns">
+                    <div id="personalData">
+                        <div [style]="{'height':'auto'}">
+                            <div class="line options">
+                                <img src="assets/images/perfil.png" alt="perfil">
+                                <div [style]="{'width':'auto', 'display':'flex', 'flex-wrap':'wrap', 'gap':'5px'}">
+                                    <button class="btn btn-accept" (click)="create(2)">Aceptar</button>
+                                    <button class="btn btn-cancel" (click)="showDeleteWindow()">Eliminar</button>
+                                </div>
+                            </div>
+                            <div class="line">
+                                <label>Nombre:</label>
+                            </div>
+                            <div class="line">
+                                <input class="personal-content-input" type="text" [(ngModel)]="selectedClient.name">
+                            </div>
+                            <br>
+                            <div class="line">
+                                <label>Apellido Paterno:</label>
+                            </div>
+                            <div class="line">
+                                <input class="personal-content-input" type="text" [(ngModel)]="selectedClient.lastName">
+                            </div>
+                            <br>
+                            <div class="line">
+                                <label>Apellido Materno:</label>
+                            </div>
+                            <div class="line">
+                                <input class="personal-content-input" type="text" [(ngModel)]="selectedClient.maternalSurname">
+                            </div>
+                            <br>
+                            <div class="line">
+                                <label>Dirección:</label>
+                            </div>
+                            <div class="line">
+                                <input type="text" class="personal-content-input" [(ngModel)]="selectedClient.address">
+                            </div>
+                            <br>
+                            <div [style]="{'display':'flex', 'hight':'auto', 'gap':'10px'}">
+                                <div>
+                                    <div class="line">
+                                        <label>Teléfono:</label>
+                                    </div>
+                                    <div class="line">
+                                        <input type="text" class="personal-content-input phone-email" [(ngModel)]="selectedClient.phone">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="line">
+                                        <label>Email:</label>
+                                    </div>
+                                    <div class="line">
+                                        <input type="email" class="personal-content-input phone-email" [(ngModel)]="selectedClient.email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sales">
+                        <div *ngIf="!isActivateSaleWindow">
+                            <h1 class="line">Compras Realizadas</h1>
+                            <div class="line date-range">
+                                <div class="line date">
+                                    <div class="line">
+                                        <label>Del:</label>
+                                    </div>
+                                    <div class="line">
+                                        <input class="date-input" type="date" (change)="filterSales()" [(ngModel)]="startDate">
+                                    </div>
+                                </div>
+                                <div class="line date">
+                                    <div class="line">
+                                        <label>Al:</label>
+                                    </div>
+                                    <div class="line">
+                                        <input class="date-input" type="date" (change)="filterSales()" [(ngModel)]="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all">
+                                <div *ngIf="sales.length<=0" class="withoutSales">
+                                    <label>Sin compras registradas</label>
+                                </div>
+                                <table *ngIf="sales.length>0">
+                                    <tr>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            No. Productos
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                        <th>
+                                            Opciones
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let sale of sales; index as id">
+                                        <td>
+                                            {{sale.date}}
+                                        </td>
+                                        <td>
+                                            {{sale.details.length}}
+                                        </td>
+                                        <td>
+                                            {{sale.total}}
+                                        </td>
+                                        <td>
+                                            <button type="button" (click)="viewDetails(sale)"><u>ver</u></button>
+                                            <button type="button" (click)="download(sale.id)"><u>Descargar</u></button>
+                                            <button type="button" (click)="sendByEmail(sale.id)"><u>enviar</u></button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div *ngIf="isActivateSaleWindow">
+                            <h1 class="line">Id de Compra: {{selectedSale.id}}</h1>
+                            <div class="line date-range">
+                                <div class="line date">
+                                    Fecha de Compra: {{selectedSale.date}}
+                                </div>
+                                <div class="line date">
+                                    Atendido por: {{selectedSale.user}}
+                                </div>
+                            </div>
+                            <div class="all">
+                                <div *ngIf="selectedSale.details.length<=0" class="withoutSales">
+                                    <label>Sin detalles registradas</label>
+                                </div>
+                                <table *ngIf="selectedSale.details.length>0">
+                                    <tr>
+                                        <th>
+                                            No.
+                                        </th>
+                                        <th>
+                                            Producto
+                                        </th>
+                                        <th>
+                                            Precio
+                                        </th>
+                                        <th>
+                                            Cantidad
+                                        </th>
+                                        <th>
+                                            Sub.
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let detail of selectedSale.details; index as i">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{detail.name}}
+                                        </td>
+                                        <td>
+                                            {{detail.price}}
+                                        </td>
+                                        <td>
+                                            {{detail.quantity}}
+                                        </td>
+                                        <td>
+                                            {{detail.price*detail.quantity}}
+                                        </td>
+                                    </tr>
+                                    <tr class="final">
+                                        <th>
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                        <th class="total">
+                                            {{selectedSale.total}}
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="line back">
+                                <button class="btn btn-back" (click)="back()">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="protector" *ngIf="isActivateNewWindow" (click)="closeWindow(1)">
     <div id="protector-content">
         <div id="protector-card" (click)="clickCard($event)">
             <div id="protector-card-content">
@@ -45,49 +248,69 @@
                     <label>Nombre:</label>
                 </div>
                 <div>
-                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.name">
+                    <input class="protector-card-content-input" type="text" [(ngModel)]="selectedClient.name">
                 </div>
                 <br>
                 <div>
                     <label>Apellido Paterno:</label>
                 </div>
                 <div>
-                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.lastName">
+                    <input class="protector-card-content-input" type="text" [(ngModel)]="selectedClient.lastName">
                 </div>
                 <br>
                 <div>
                     <label>Apellido Materno:</label>
                 </div>
                 <div>
-                    <input id="protector-card-content-input" type="text" [(ngModel)]="selectedClient.maternalSurname">
+                    <input class="protector-card-content-input" type="text" [(ngModel)]="selectedClient.maternalSurname">
                 </div>
                 <br>
                 <div>
                     <label>Dirección:</label>
                 </div>
                 <div>
-                    <input type="text" id="protector-card-content-input" [(ngModel)]="selectedClient.address">
+                    <input type="text" class="protector-card-content-input" [(ngModel)]="selectedClient.address">
                 </div>
                 <br>
-                <div>
-                    <label>Teléfono:</label>
-                </div>
-                <div>
-                    <input type="text" id="protector-card-content-input" [(ngModel)]="selectedClient.phone">
-                </div>
-                <br>
-                <div>
-                    <label>Email:</label>
-                </div>
-                <div>
-                    <input type="email" id="protector-card-content-input" [(ngModel)]="selectedClient.email">
+                <div [style]="{'display':'flex', 'hight':'auto', 'gap':'15px'}">
+                    <div>
+                        <div>
+                            <label>Teléfono:</label>
+                        </div>
+                        <div>
+                            <input type="text" class="protector-card-content-input phone-email2" [(ngModel)]="selectedClient.phone">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label>Email:</label>
+                        </div>
+                        <div>
+                            <input type="email" class="protector-card-content-input phone-email2" [(ngModel)]="selectedClient.email">
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <div class="confirm-dialog-actions">
-                    <button class="btn btn-accept" (click)="create()">Aceptar</button>
-                    <button class="btn btn-cancel" (click)="closeWindow()">Cancelar</button>
+                    <button class="btn btn-accept" (click)="create(1)">Aceptar</button>
+                    <button class="btn btn-cancel" (click)="closeWindow(1)">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div id="protector" *ngIf="isActivateDeleteWindow" (click)="closeWindow(2)">
+    <div id="protector-content">
+        <div id="protector-card" (click)="clickCard($event)">
+            <div id="protector-card-content">
+                <p>¿Estás seguro de eliminar al cliente: {{selectedClient.name}} con Id: {{selectedClient.id}}?</p>
+                <div class="confirm-dialog-actions">
+                    <button class="btn btn-accept" (click)="delete()">Aceptar</button>
+                    <button class="btn btn-cancel" (click)="closeWindow(2)">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

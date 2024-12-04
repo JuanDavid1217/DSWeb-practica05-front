@@ -35,6 +35,9 @@ export class GeneralService {
                     message = "Usuario y/o contraseña incorrectos"
                 }
                 break
+              case 409:
+                message = error.response.data
+                break
               default:
                 message=error.message
             }
